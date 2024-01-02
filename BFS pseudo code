@@ -1,7 +1,7 @@
 BFS (puzzle):
   Visited = List()
-	Q = Queue()
-	Q.Enquque(puzzle.InitState)
+  Q = Queue()
+  Q.Enquque(puzzle.InitState)
   while not Q.Empty() do:
       current = Q.Dequeue()
       Visited.Add(current)
@@ -10,5 +10,4 @@ BFS (puzzle):
       for puzzleState in puzzle.GetNextPossibleMoves(current) do:
             if puzzleState not in Visited do:
                   Q.Enqueue(puzzleState)
-
   return "No Solution!"
