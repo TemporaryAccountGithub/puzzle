@@ -6,15 +6,22 @@ namespace Puzzle
     {
         public static void Main(string[] args)
         {
-            string[,] matrix = { { "1", "2" }, { "3", "X" } };
-            PuzzleState state = new PuzzleState(matrix);
-            MovingPuzzle puzzle = new MovingPuzzle(state, state);
-            Console.WriteLine(state);
-            Console.WriteLine("======================");
+            string[,] initialMatrix = { { "3", "2" }, { "X", "1" } };
+            PuzzleState initialState = new PuzzleState(initialMatrix);
+            string[,] finalMatrix = { { "2", "1" }, { "X", "3" } };
+            PuzzleState finalState = new PuzzleState(finalMatrix);
+            MovingPuzzle puzzle = new MovingPuzzle(initialState, finalState);
 
-            foreach (var state1 in puzzle.GetNextPossibleMoves(state))
+            Console.WriteLine("Going From:");
+            Console.WriteLine(initialState);
+            Console.WriteLine("To:");
+            Console.WriteLine(finalState);
+            Console.WriteLine("===================================");
+
+            PuzzleSolverContext context = new PuzzleSolverContext(new SearchBFS());
+            foreach (var state in context.Solve(puzzle))
             {
-                Console.WriteLine(state1);
+                Console.WriteLine(state);
             }
         }
     }

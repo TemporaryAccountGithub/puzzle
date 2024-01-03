@@ -5,8 +5,6 @@ namespace PuzzleTests
     [TestClass]
     public class MovingPuzzleTest
     {
-        private MovingPuzzle movingPuzzle;
-
         [TestMethod]
         public void given_simplePuzzle_when_createPuzzle_then_initialStateCreated()
         {
@@ -29,6 +27,21 @@ namespace PuzzleTests
             MovingPuzzle puzzle = new MovingPuzzle(initalState, finalState);
 
             Assert.AreEqual(finalState, puzzle.FinalState);
+        }
+
+        [TestMethod]
+        public void given_smallPuzzle_when_getNextMoves_then_returnListWithOneMove()
+        {
+            string[,] matrix = { { "1", "X" } };
+            PuzzleState state = new PuzzleState(matrix);
+            MovingPuzzle puzzle = new MovingPuzzle(null, null);
+            string[,] expectedMatrix = { { "X", "1" } };
+            PuzzleState expectedState = new PuzzleState(expectedMatrix);
+
+            var result = puzzle.GetNextPossibleMoves(state);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(expectedState, result.First());
         }
     }
 }
