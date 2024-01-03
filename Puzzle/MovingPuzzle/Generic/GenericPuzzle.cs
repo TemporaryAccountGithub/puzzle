@@ -1,6 +1,6 @@
 ﻿namespace Puzzle
 {
-    internal abstract class GenericPuzzle
+    public abstract class GenericPuzzle
     {
         public PuzzleState InitialState { get; }
         public PuzzleState FinalState { get; }
