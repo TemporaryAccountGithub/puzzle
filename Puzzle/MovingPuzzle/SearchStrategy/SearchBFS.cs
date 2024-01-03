@@ -1,6 +1,6 @@
 ﻿namespace Puzzle
 {
-    internal class SearchBFS : IStrategySearch
+    public class SearchBFS : IStrategySearch
     {
         public List<PuzzleState> Search(GenericPuzzle puzzle)
         {

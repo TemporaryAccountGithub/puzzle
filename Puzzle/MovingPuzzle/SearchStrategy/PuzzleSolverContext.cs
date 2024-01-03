@@ -1,6 +1,6 @@
 ﻿namespace Puzzle
 {
-    internal class PuzzleSolverContext
+    public class PuzzleSolverContext
     {
         private IStrategySearch searchStrategy;
 

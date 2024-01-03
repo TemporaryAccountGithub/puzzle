@@ -18,8 +18,8 @@ namespace Puzzle
             Console.WriteLine(finalState);
             Console.WriteLine("===================================");
 
-            PuzzleSolverContext context = new PuzzleSolverContext(new SearchBFS());
-            foreach (var state in context.Solve(puzzle))
+            PuzzleSolverContext solverContext = new PuzzleSolverContext(new SearchBFS());
+            foreach (var state in solverContext.Solve(puzzle))
             {
                 Console.WriteLine(state);
             }
