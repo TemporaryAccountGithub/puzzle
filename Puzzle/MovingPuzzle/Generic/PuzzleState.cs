@@ -15,13 +15,7 @@ namespace Puzzle
             Array.Copy(matrix, Matrix, Matrix.Length);
         }
 
-        public PuzzleState Copy()
-        {
-            string[,] newMatrix = new string[numberOfRows, numberOfColumns];
-            Array.Copy(Matrix, newMatrix, newMatrix.Length);
-
-            return new PuzzleState(newMatrix);
-        }
+        public PuzzleState(PuzzleState otherState) : this(otherState.Matrix) { }
 
         internal bool TrySwapCells(Cell first, Cell second)
         {

@@ -14,15 +14,15 @@ namespace Puzzle
             List<PuzzleState> nextPossibleMoves = new List<PuzzleState>();
 
             Cell movingCell = FindMovingCell(state);
-            Cell[] possibleSwaps = new Cell[4] 
-            {
+            Cell[] possibleSwaps =
+            [
                 new Cell(movingCell.RowIndex + 1, movingCell.ColumnIndex),
                 new Cell(movingCell.RowIndex - 1, movingCell.ColumnIndex),
                 new Cell(movingCell.RowIndex, movingCell.ColumnIndex + 1),
                 new Cell(movingCell.RowIndex, movingCell.ColumnIndex - 1)
-            }; 
+            ];
 
-            foreach (Cell possibleSwap in possibleSwaps) 
+            foreach (Cell possibleSwap in possibleSwaps)
             {
                 TryAddState(nextPossibleMoves, movingCell, possibleSwap, state);
             }
@@ -30,7 +30,7 @@ namespace Puzzle
             return nextPossibleMoves;
         }
 
-        private Cell FindMovingCell(PuzzleState state) 
+        private Cell FindMovingCell(PuzzleState state)
         {
             for (int i = 0; i < state.Matrix.GetLength(0); i++)
             {
@@ -48,7 +48,7 @@ namespace Puzzle
 
         private void TryAddState(List<PuzzleState> nextPossibleMoves, Cell MovingCell, Cell secondCell, PuzzleState state)
         {
-            PuzzleState copyState = state.Copy();
+            PuzzleState copyState = new PuzzleState(state);
             if (copyState.TrySwapCells(MovingCell, secondCell))
             {
                 nextPossibleMoves.Add(copyState);

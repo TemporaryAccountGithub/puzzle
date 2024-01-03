@@ -8,12 +8,12 @@
             Queue<SearchNode> searchQueue = new Queue<SearchNode>();
             searchQueue.Enqueue(new SearchNode(puzzle.InitialState, new List<PuzzleState> { puzzle.InitialState }));
 
-            while (searchQueue.Count > 0) 
+            while (searchQueue.Count > 0)
             {
                 SearchNode currentNode = searchQueue.Dequeue();
                 visited.Add(currentNode.State);
 
-                if (currentNode.State.Equals(puzzle.FinalState)) 
+                if (currentNode.State.Equals(puzzle.FinalState))
                 {
                     return currentNode.Path;
                 }
