@@ -1,6 +1,4 @@
-﻿using Puzzle.Generic;
-
-namespace Puzzle
+﻿namespace Puzzle
 {
     public class PuzzleState
     {
@@ -68,7 +66,7 @@ namespace Puzzle
 
         public override string ToString()
         {
-            string result = "";
+            string result = "\n";
 
             for (int i = 0; i < numberOfRows; i++)
             {

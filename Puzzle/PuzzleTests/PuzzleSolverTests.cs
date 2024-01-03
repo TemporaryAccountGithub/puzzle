@@ -6,7 +6,7 @@ namespace PuzzleTests
     public class PuzzleSolverTests
     {
         [TestMethod]
-        public void given_examplePuzzle_when_solve_then_returnCorrectList()
+        public void given_examplePuzzle_when_solveWithBFS_then_returnCorrectList()
         {
             PuzzleSolverContext solverContext = new PuzzleSolverContext(new SearchBFS());
             string[,] initialMatrix = { { "3", "2" }, { "X", "1" } };
