@@ -30,7 +30,19 @@ namespace PuzzleTests
         }
 
         [TestMethod]
-        public void given_smallPuzzle_when_getNextMoves_then_returnListWithOneMove()
+        public void given_smallestPuzzle_when_getNextMoves_then_returnEmptyList()
+        {
+            string[,] matrix = { { "X" } };
+            PuzzleState state = new PuzzleState(matrix);
+            MovingPuzzle puzzle = new MovingPuzzle(null, null);
+
+            var result = puzzle.GetNextPossibleMoves(state);
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void given_puzzle_when_getNextMoves_then_returnListWithMoves()
         {
             string[,] matrix = { { "1", "X" } };
             PuzzleState state = new PuzzleState(matrix);

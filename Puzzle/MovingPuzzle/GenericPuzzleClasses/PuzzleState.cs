@@ -17,23 +17,20 @@ namespace Puzzle
 
         public PuzzleState(PuzzleState otherState) : this(otherState.Matrix) { }
 
-        internal bool TrySwapCells(Cell first, Cell second)
+        internal void SwapCells(CellIndex first, CellIndex second)
         {
-            if (!CellInMatix(first) || !CellInMatix(second))
-            {
-                return false;
-            }
-
             string tmp = Matrix[first.RowIndex, first.ColumnIndex];
             Matrix[first.RowIndex, first.ColumnIndex] = Matrix[second.RowIndex, second.ColumnIndex];
             Matrix[second.RowIndex, second.ColumnIndex] = tmp;
-
-            return true;
         }
 
-        private bool CellInMatix(Cell cell)
+        private bool CellInMatix(CellIndex cell)
         {
             return cell.RowIndex >= 0 && cell.ColumnIndex >= 0 && cell.RowIndex < numberOfRows && cell.ColumnIndex < numberOfColumns;
+        }
+        internal bool CanSwapCells(CellIndex first, CellIndex second)
+        {
+            return CellInMatix(first) && CellInMatix(second);
         }
 
         public override int GetHashCode()
@@ -67,7 +64,6 @@ namespace Puzzle
             }
 
             return true;
-
         }
 
         public override string ToString()

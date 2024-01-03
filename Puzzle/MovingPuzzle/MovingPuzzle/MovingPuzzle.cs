@@ -13,44 +13,45 @@ namespace Puzzle
         {
             List<PuzzleState> nextPossibleMoves = new List<PuzzleState>();
 
-            Cell movingCell = FindMovingCell(state);
-            Cell[] possibleSwaps =
+            CellIndex movingCell = FindMovingCell(state);
+            CellIndex[] possibleSwaps =
             [
-                new Cell(movingCell.RowIndex + 1, movingCell.ColumnIndex),
-                new Cell(movingCell.RowIndex - 1, movingCell.ColumnIndex),
-                new Cell(movingCell.RowIndex, movingCell.ColumnIndex + 1),
-                new Cell(movingCell.RowIndex, movingCell.ColumnIndex - 1)
+                new CellIndex(movingCell.RowIndex + 1, movingCell.ColumnIndex),
+                new CellIndex(movingCell.RowIndex - 1, movingCell.ColumnIndex),
+                new CellIndex(movingCell.RowIndex, movingCell.ColumnIndex + 1),
+                new CellIndex(movingCell.RowIndex, movingCell.ColumnIndex - 1)
             ];
 
-            foreach (Cell possibleSwap in possibleSwaps)
+            foreach (CellIndex possibleSwap in possibleSwaps)
             {
-                TryAddState(nextPossibleMoves, movingCell, possibleSwap, state);
+                TryAddPossibleMove(nextPossibleMoves, movingCell, possibleSwap, state);
             }
 
             return nextPossibleMoves;
         }
 
-        private Cell FindMovingCell(PuzzleState state)
+        private CellIndex FindMovingCell(PuzzleState state)
         {
-            for (int i = 0; i < state.Matrix.GetLength(0); i++)
+            for (int i = 0; i < state.numberOfRows; i++)
             {
-                for (int j = 0; j < state.Matrix.GetLength(1); j++)
+                for (int j = 0; j < state.numberOfColumns; j++)
                 {
                     if (state.Matrix[i, j] == MovingValue)
                     {
-                        return new Cell(i, j);
+                        return new CellIndex(i, j);
                     }
                 }
             }
 
-            return new Cell(-1, -1);
+            throw new ArgumentException($"Table must contain moving cell with value: {MovingValue}");
         }
 
-        private void TryAddState(List<PuzzleState> nextPossibleMoves, Cell MovingCell, Cell secondCell, PuzzleState state)
+        private void TryAddPossibleMove(List<PuzzleState> nextPossibleMoves, CellIndex movingCell, CellIndex secondCell, PuzzleState state)
         {
-            PuzzleState copyState = new PuzzleState(state);
-            if (copyState.TrySwapCells(MovingCell, secondCell))
+            if (state.CanSwapCells(movingCell, secondCell))
             {
+                PuzzleState copyState = new PuzzleState(state);
+                copyState.SwapCells(movingCell, secondCell);
                 nextPossibleMoves.Add(copyState);
             }
         }
