@@ -31,7 +31,7 @@ namespace Puzzle
 
         private void TryAddPossibleMove(List<PuzzleState> nextPossibleMoves, CellIndex movingCell, CellIndex secondCell, PuzzleState state)
         {
-            if (state.CanSwapCells(movingCell, secondCell) && (state.Matrix[secondCell.RowIndex, secondCell.ColumnIndex] == "0"))
+            if (state.CanSwapCells(movingCell, secondCell) && (state.Matrix[secondCell.RowIndex, secondCell.ColumnIndex] == EmptyValue))
             {
                 PuzzleState copyState = new PuzzleState(state);
                 copyState.SwapCells(movingCell, secondCell);
