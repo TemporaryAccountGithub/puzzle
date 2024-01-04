@@ -23,7 +23,7 @@ namespace Puzzle
             logger.Info(finalState);
             logger.Info("===================================");
 
-            PuzzleSolverContext solverContext = new PuzzleSolverContext(new SearchBFS());
+            PuzzleSolverContext solverContext = new PuzzleSolverContext(new SearchDFS());
             foreach (var state in solverContext.Solve(puzzle))
             {
                 logger.Info(state);

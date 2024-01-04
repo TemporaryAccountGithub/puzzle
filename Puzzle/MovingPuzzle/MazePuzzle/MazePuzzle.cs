@@ -12,6 +12,7 @@ namespace Puzzle
         {
             ValidateState(initialState);
             ValidateState(finalState);
+            ValidatePuzzle();
         }
 
         public override List<PuzzleState> GetNextPossibleMoves(PuzzleState state)
@@ -52,20 +53,41 @@ namespace Puzzle
                     {
                         if (haveMovingValue)
                         {
-                            throw new ArgumentException($"There can be only one moving cell with value: {MovingValue}");
+                            throw new ArgumentException($"There can be only one moving cell with value: {MovingValue}!");
                         }
                         haveMovingValue = true;
                     }
                     else if (currentValue != WallValue && currentValue != EmptyValue)
                     {
-                        throw new ArgumentException($"Cannot contain invalid values: {currentValue}");
+                        throw new ArgumentException($"Cannot contain invalid values: {currentValue}!");
                     }
                 }
             }
 
             if (!haveMovingValue)
             {
-                throw new ArgumentException($"Must contain one moving cell with value: {MovingValue}");
+                throw new ArgumentException($"Must contain one moving cell with value: {MovingValue}!");
+            }
+        }
+
+        private void ValidatePuzzle()
+        {
+            if ((InitialState.numberOfRows != FinalState.numberOfRows) || (FinalState.numberOfColumns != InitialState.numberOfColumns))
+            {
+                throw new ArgumentException("Initial and Final puzzle states must have the same dimensions!");
+            }
+
+            for (int i = 0; i < InitialState.numberOfRows; i++)
+            {
+                for (int j = 0; j < InitialState.numberOfColumns; j++)
+                {
+                    string initialCellValue = InitialState.Matrix[i, j];
+                    string finalCellValue = FinalState.Matrix[i, j];
+                    if ((initialCellValue != MovingValue) && (finalCellValue != MovingValue) && (initialCellValue != finalCellValue))
+                    {
+                        throw new ArgumentException("Initial and final states in maze puzzle do not match!");
+                    }
+                }
             }
         }
     }
