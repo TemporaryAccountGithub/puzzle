@@ -1,7 +1,4 @@
-﻿using Puzzle.Generic;
-using System.Collections.Generic;
-
-namespace Puzzle
+﻿namespace Puzzle
 {
     public class MovingPuzzle : GenericPuzzle
     {
@@ -13,37 +10,14 @@ namespace Puzzle
         {
             List<PuzzleState> nextPossibleMoves = new List<PuzzleState>();
 
-            CellIndex movingCell = FindMovingCell(state);
-            CellIndex[] possibleSwaps =
-            [
-                new CellIndex(movingCell.RowIndex + 1, movingCell.ColumnIndex),
-                new CellIndex(movingCell.RowIndex - 1, movingCell.ColumnIndex),
-                new CellIndex(movingCell.RowIndex, movingCell.ColumnIndex + 1),
-                new CellIndex(movingCell.RowIndex, movingCell.ColumnIndex - 1)
-            ];
+            CellIndex movingCell = FindMovingCell(state, MovingValue);
 
-            foreach (CellIndex possibleSwap in possibleSwaps)
+            foreach (CellIndex possibleSwap in GetAdjacentCellIndexes(movingCell))
             {
                 TryAddPossibleMove(nextPossibleMoves, movingCell, possibleSwap, state);
             }
 
             return nextPossibleMoves;
-        }
-
-        private CellIndex FindMovingCell(PuzzleState state)
-        {
-            for (int i = 0; i < state.numberOfRows; i++)
-            {
-                for (int j = 0; j < state.numberOfColumns; j++)
-                {
-                    if (state.Matrix[i, j] == MovingValue)
-                    {
-                        return new CellIndex(i, j);
-                    }
-                }
-            }
-
-            throw new ArgumentException($"Table must contain moving cell with value: {MovingValue}");
         }
 
         private void TryAddPossibleMove(List<PuzzleState> nextPossibleMoves, CellIndex movingCell, CellIndex secondCell, PuzzleState state)

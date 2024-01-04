@@ -1,6 +1,6 @@
-﻿namespace Puzzle.Generic
+﻿namespace Puzzle
 {
-    internal class CellIndex
+    public class CellIndex
     {
         public int RowIndex { get; set; }
         public int ColumnIndex { get; set; }
