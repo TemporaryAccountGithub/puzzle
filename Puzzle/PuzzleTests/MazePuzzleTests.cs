@@ -54,5 +54,70 @@ namespace PuzzleTests
 
             Assert.ThrowsException<ArgumentException>(() => new MazePuzzle(new PuzzleState(matrix), new PuzzleState(finalMatrix)));
         }
+
+        [TestMethod]
+        public void given_mazePuzzle_when_getNextPossibleMoves_then_returnMoves()
+        {
+            string[,] matrix =
+                {
+                    { "0", "0", "0", "0", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "X", "1", "1", "1", "0" },
+                };
+            PuzzleState state = new PuzzleState(matrix);
+            MazePuzzle puzzle = new MazePuzzle(state, state);
+
+            PuzzleState expectedState = new PuzzleState(new string[,]
+            {
+                    { "0", "0", "0", "0", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "X", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+            });
+
+            var result = puzzle.GetNextPossibleMoves(state);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(expectedState, result.First());
+        }
+
+        [TestMethod]
+        public void given_smallestMazePuzzle_when_getNextPossibleMoves_then_returnEmptyList()
+        {
+            PuzzleState state = new PuzzleState(new string[,] { { "X" } });
+            MazePuzzle puzzle = new MazePuzzle(state, state);
+
+            var result = puzzle.GetNextPossibleMoves(state);
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void given_mazePuzzleAndStuckState_when_getNextPossibleMoves_then_returnEmptyList()
+        {
+            string[,] matrix =
+                {
+                    { "0", "0", "0", "0", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "0", "1", "1", "1", "0" },
+                    { "1", "1", "1", "1", "0" },
+                    { "X", "1", "1", "1", "0" },
+                };
+            PuzzleState state = new PuzzleState(matrix);
+            MazePuzzle puzzle = new MazePuzzle(state, state);
+
+            var result = puzzle.GetNextPossibleMoves(state);
+
+            Assert.AreEqual(0, result.Count);
+        }
     }
 }
