@@ -5,6 +5,7 @@ namespace Puzzle
     public class SearchDFS : IStrategySearch
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
         public List<PuzzleState> Search(GenericPuzzle puzzle)
         {
             List<PuzzleState> visited = new List<PuzzleState>();
