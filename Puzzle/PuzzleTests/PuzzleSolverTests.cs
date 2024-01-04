@@ -82,7 +82,29 @@ namespace PuzzleTests
             };
 
             CollectionAssert.AreEqual(expectedSteps, solverContext.Solve(mazePuzzle));
+        }
 
+        [TestMethod]
+        public void given_mazePuzzleWithoutSolution_when_solve_then_returnEmptyList()
+        {
+            PuzzleSolverContext solverContext = new PuzzleSolverContext(new SearchBFS());
+            List<PuzzleState> expectedSteps = new List<PuzzleState>();
+
+            string[,] initialMazeMatrix =
+                {
+                    { "0", "1", "0" },
+                    { "X", "1", "0" },
+                };
+            PuzzleState initialMazeState = new PuzzleState(initialMazeMatrix);
+            string[,] finalMazeMatrix =
+                {
+                    { "0", "1", "0" },
+                    { "0", "1", "X" },
+                };
+            PuzzleState finalMazeState = new PuzzleState(finalMazeMatrix);
+            mazePuzzle = new MazePuzzle(initialMazeState, finalMazeState);
+
+            CollectionAssert.AreEqual(expectedSteps, solverContext.Solve(mazePuzzle));
         }
     }
 }
