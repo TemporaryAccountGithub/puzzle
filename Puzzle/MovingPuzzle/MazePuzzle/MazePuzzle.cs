@@ -11,7 +11,9 @@ namespace Puzzle
 
         public MazePuzzle(PuzzleState initialState, PuzzleState finalState) : base(initialState, finalState)
         {
-            ValidatePuzzle();
+            ValidateState(InitialState);
+            ValidateState(FinalState);
+            ValidateInitialAndFinalMatch();
         }
 
         public override List<PuzzleState> GetNextPossibleMoves(PuzzleState state)
@@ -52,7 +54,7 @@ namespace Puzzle
                     {
                         if (haveMovingValue)
                         {
-                            Fatal($"There can be only one moving cell with value: {MovingValue}!");
+                            Fatal($"Cannot be more than one moving cell with value: {MovingValue}!");
                         }
                         haveMovingValue = true;
                     }
@@ -69,11 +71,8 @@ namespace Puzzle
             }
         }
 
-        private void ValidatePuzzle()
+        private void ValidateInitialAndFinalMatch()
         {
-            ValidateState(InitialState);
-            ValidateState(FinalState);
-
             if ((InitialState.numberOfRows != FinalState.numberOfRows) || (FinalState.numberOfColumns != InitialState.numberOfColumns))
             {
                 Fatal("Initial and Final puzzle states must have the same dimensions!");
