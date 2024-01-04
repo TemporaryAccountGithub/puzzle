@@ -11,8 +11,6 @@ namespace Puzzle
 
         public MazePuzzle(PuzzleState initialState, PuzzleState finalState) : base(initialState, finalState)
         {
-            ValidateState(initialState);
-            ValidateState(finalState);
             ValidatePuzzle();
         }
 
@@ -73,6 +71,9 @@ namespace Puzzle
 
         private void ValidatePuzzle()
         {
+            ValidateState(InitialState);
+            ValidateState(FinalState);
+
             if ((InitialState.numberOfRows != FinalState.numberOfRows) || (FinalState.numberOfColumns != InitialState.numberOfColumns))
             {
                 Fatal("Initial and Final puzzle states must have the same dimensions!");
