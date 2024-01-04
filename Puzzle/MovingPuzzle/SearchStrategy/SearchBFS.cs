@@ -32,7 +32,7 @@ namespace Puzzle
                 }
             }
 
-            logger.Error("No Solution found!");
+            logger.Warn("No Solution found!");
             return new List<PuzzleState>();
         }
     }
