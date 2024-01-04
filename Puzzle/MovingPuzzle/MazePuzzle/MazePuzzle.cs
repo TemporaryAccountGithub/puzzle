@@ -4,6 +4,7 @@ namespace Puzzle
 {
     public class MazePuzzle : GenericPuzzle
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private const string MovingValue = "X";
         private const string EmptyValue = "0";
         private const string WallValue = "1";
@@ -53,20 +54,20 @@ namespace Puzzle
                     {
                         if (haveMovingValue)
                         {
-                            throw new ArgumentException($"There can be only one moving cell with value: {MovingValue}!");
+                            Fatal($"There can be only one moving cell with value: {MovingValue}!");
                         }
                         haveMovingValue = true;
                     }
                     else if (currentValue != WallValue && currentValue != EmptyValue)
                     {
-                        throw new ArgumentException($"Cannot contain invalid values: {currentValue}!");
+                        Fatal($"Cannot contain invalid values: {currentValue}!");
                     }
                 }
             }
 
             if (!haveMovingValue)
             {
-                throw new ArgumentException($"Must contain one moving cell with value: {MovingValue}!");
+                Fatal($"Must contain one moving cell with value: {MovingValue}!");
             }
         }
 
@@ -74,7 +75,7 @@ namespace Puzzle
         {
             if ((InitialState.numberOfRows != FinalState.numberOfRows) || (FinalState.numberOfColumns != InitialState.numberOfColumns))
             {
-                throw new ArgumentException("Initial and Final puzzle states must have the same dimensions!");
+                Fatal("Initial and Final puzzle states must have the same dimensions!");
             }
 
             for (int i = 0; i < InitialState.numberOfRows; i++)
@@ -85,10 +86,16 @@ namespace Puzzle
                     string finalCellValue = FinalState.Matrix[i, j];
                     if ((initialCellValue != MovingValue) && (finalCellValue != MovingValue) && (initialCellValue != finalCellValue))
                     {
-                        throw new ArgumentException("Initial and final states in maze puzzle do not match!");
+                        Fatal("Initial and final states in maze puzzle do not match!");
                     }
                 }
             }
+        }
+
+        private void Fatal(string message) 
+        {
+            logger.Fatal(message);
+            throw new ArgumentException(message);
         }
     }
 }

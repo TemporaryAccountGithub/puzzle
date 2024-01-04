@@ -1,7 +1,10 @@
-﻿namespace Puzzle
+﻿using NLog;
+
+namespace Puzzle
 {
     public class SearchBFS : IStrategySearch
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public List<PuzzleState> Search(GenericPuzzle puzzle)
         {
             List<PuzzleState> visited = new List<PuzzleState>();
@@ -15,6 +18,7 @@
 
                 if (currentNode.State.Equals(puzzle.FinalState))
                 {
+                    logger.Info("Solution found!");
                     return currentNode.Path;
                 }
 
@@ -28,6 +32,7 @@
                 }
             }
 
+            logger.Error("No Solution found!");
             return new List<PuzzleState>();
         }
     }
