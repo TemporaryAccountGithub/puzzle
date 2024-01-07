@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puzzle", "MovingPuzzle\Puzzle.csproj", "{628EBD11-4C17-4E4D-844B-B0A40E3546B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puzzle", "MovingPuzzle\Puzzle.csproj", "{628EBD11-4C17-4E4D-844B-B0A40E3546B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleTests", "PuzzleTests\PuzzleTests.csproj", "{4E1073C8-0075-4ADF-8AEB-0F0C7391C8EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuzzleTests", "PuzzleTests\PuzzleTests.csproj", "{4E1073C8-0075-4ADF-8AEB-0F0C7391C8EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleServer", "PuzzleServer\PuzzleServer.csproj", "{B062422A-AFFC-4D5F-A829-8B3F7F5D2DE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4E1073C8-0075-4ADF-8AEB-0F0C7391C8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E1073C8-0075-4ADF-8AEB-0F0C7391C8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E1073C8-0075-4ADF-8AEB-0F0C7391C8EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B062422A-AFFC-4D5F-A829-8B3F7F5D2DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B062422A-AFFC-4D5F-A829-8B3F7F5D2DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B062422A-AFFC-4D5F-A829-8B3F7F5D2DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B062422A-AFFC-4D5F-A829-8B3F7F5D2DE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

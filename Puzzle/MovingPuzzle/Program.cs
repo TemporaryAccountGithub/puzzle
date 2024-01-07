@@ -1,4 +1,9 @@
 ﻿using NLog;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Puzzle
 {
@@ -9,6 +14,8 @@ namespace Puzzle
         public static void Main(string[] args)
         {
             ConfigLogger();
+
+            //var app = WebApplication.Create();
 
             string[,] initialMatrix = { { "3", "2" }, { "X", "1" } };
             PuzzleState initialState = new PuzzleState(initialMatrix);
