@@ -4,13 +4,9 @@
     {
         public IStrategySearch CreateSearchStrategy(string searchType)
         {
-            if (searchType == "")
-            {
-                return new SearchBFS();
-            }
-
             switch (searchType.ToLower())
             {
+                case "":
                 case "bfs":
                     return new SearchBFS();
 
