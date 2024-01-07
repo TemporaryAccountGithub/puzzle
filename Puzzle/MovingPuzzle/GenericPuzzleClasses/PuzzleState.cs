@@ -13,7 +13,44 @@
             Array.Copy(matrix, Matrix, Matrix.Length);
         }
 
+        public PuzzleState(string[][] arrayOfStringArrays)
+        {
+            numberOfRows = arrayOfStringArrays.Length;
+            numberOfColumns = arrayOfStringArrays[0].Length;
+            Matrix = new string[numberOfRows, numberOfColumns];
+
+            for (int i = 0; i < numberOfRows; i++)
+            {
+                string[] stringArray = arrayOfStringArrays[i];
+                if (stringArray.Length != numberOfColumns)
+                {
+                    throw new ArgumentException("Array of string arrays must be a matrix!");
+                }
+
+                for (int j = 0; j < numberOfColumns; j++)
+                {
+                    Matrix[i, j] = arrayOfStringArrays[i][j];
+                }
+            }
+        }
+
         public PuzzleState(PuzzleState otherState) : this(otherState.Matrix) { }
+
+        public string[][] GetSerializableState()
+        {
+            string[][] result = new string[numberOfRows][];
+
+            for (int i = 0; i < numberOfRows; i++)
+            {
+                result[i] = new string[numberOfRows];
+                for (int j = 0; j < numberOfColumns; j++)
+                {
+                    result[i][j] = Matrix[i, j];
+                }
+            }
+
+            return result;
+        }
 
         internal void SwapCells(CellIndex first, CellIndex second)
         {

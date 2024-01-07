@@ -28,3 +28,10 @@ packages/
 _ReSharper*/
 *.resharper
 *.DotSettings
+
+# MVC web service specific ignores
+Puzzle/PuzzleServer/node_modules/
+Puzzle/PuzzleServer/bower_components/
+Puzzle/PuzzleServer/wwwroot/lib/
+Puzzle/PuzzleServer/*.bak
+Puzzle/PuzzleServer/*.PublishSettings
