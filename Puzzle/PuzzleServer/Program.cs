@@ -16,7 +16,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "puzzle",
-    pattern: "puzzleSolver/{type}",
+    pattern: "puzzleSolver/{puzzleType}",
     defaults: new { controller = "Puzzle", action = "Post" });
 
 app.Run();
