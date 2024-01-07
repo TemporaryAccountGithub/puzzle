@@ -12,8 +12,8 @@ namespace PuzzleServer.Controllers
             try
             {
                 PuzzleSolverContext solver = ParseSearchParam(search);
-                PuzzleState initialState = new PuzzleState(ParseToMatrix(model.InitialMatrix));
-                PuzzleState finalState = new PuzzleState(ParseToMatrix(model.FinalMatrix));
+                PuzzleState initialState = new PuzzleState(ParseFromArrayOfArraysToMatrix(model.InitialMatrix));
+                PuzzleState finalState = new PuzzleState(ParseFromArrayOfArraysToMatrix(model.FinalMatrix));
                 GenericPuzzle puzzle = ParsePuzzleType(type, initialState, finalState);
                 List<PuzzleState> result = solver.Solve(puzzle);
 
@@ -22,7 +22,7 @@ namespace PuzzleServer.Controllers
                     return Ok("No solution for the puzzle");
                 }
 
-                return Ok(result.Select(ParseFromMatrixState));
+                return Ok(result.Select(ParseFromMatrixStateToArrayOfArrays));
             }
             catch (ArgumentException ex)
             {
@@ -60,7 +60,7 @@ namespace PuzzleServer.Controllers
             }
         }
 
-        private string[][] ParseFromMatrixState(PuzzleState state)
+        private string[][] ParseFromMatrixStateToArrayOfArrays(PuzzleState state)
         {
             string[][] result = new string[state.numberOfRows][];
 
@@ -76,7 +76,7 @@ namespace PuzzleServer.Controllers
             return result;
         }
 
-        private string[,] ParseToMatrix(string[][] arrayOfStringArrays)
+        private string[,] ParseFromArrayOfArraysToMatrix(string[][] arrayOfStringArrays)
         {
             int numberOfRows = arrayOfStringArrays.Length;
             int numberOfColumns = arrayOfStringArrays[0].Length;
