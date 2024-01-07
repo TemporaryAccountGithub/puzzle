@@ -4,7 +4,6 @@ using PuzzleServer.Models;
 
 namespace PuzzleServer.Controllers
 {
-
     public class PuzzleController : ControllerBase
     {
         [HttpPost("puzzleSolver/{type}")]
@@ -20,7 +19,7 @@ namespace PuzzleServer.Controllers
                 switch (type.ToLower())
                 {
                     case "movingpuzzle":
-                        puzzle = new MovingPuzzle(initialState, finalState); 
+                        puzzle = new MovingPuzzle(initialState, finalState);
                         break;
 
                     case "mazepuzzle":
@@ -45,7 +44,7 @@ namespace PuzzleServer.Controllers
             }
         }
 
-        private PuzzleSolverContext ParseSearchParam(string searchParam) 
+        private PuzzleSolverContext ParseSearchParam(string searchParam)
         {
             switch (searchParam.ToLower())
             {
@@ -96,7 +95,7 @@ namespace PuzzleServer.Controllers
                 }
             }
 
-            return matrix;  
+            return matrix;
         }
     }
 }
