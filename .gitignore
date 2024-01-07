@@ -28,3 +28,10 @@ packages/
 _ReSharper*/
 *.resharper
 *.DotSettings
+
+# MVC web service specific ignores
+node_modules/
+bower_components/
+wwwroot/lib/
+*.bak
+*.PublishSettings
