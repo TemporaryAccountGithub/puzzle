@@ -24,7 +24,7 @@ namespace PuzzleServer.Controllers
 
                 if (result.Count == 0)
                 {
-                    return Ok("No solution for the puzzle");
+                    return NotFound("No solution for the puzzle");
                 }
 
                 return Ok(result.Select(state => state.GetSerializableState()));
