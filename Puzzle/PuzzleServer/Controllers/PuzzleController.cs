@@ -14,23 +14,9 @@ namespace PuzzleServer.Controllers
                 PuzzleSolverContext solver = ParseSearchParam(search);
                 PuzzleState initialState = new PuzzleState(ParseToMatrix(model.InitialMatrix));
                 PuzzleState finalState = new PuzzleState(ParseToMatrix(model.FinalMatrix));
-                GenericPuzzle puzzle;
-
-                switch (type.ToLower())
-                {
-                    case "movingpuzzle":
-                        puzzle = new MovingPuzzle(initialState, finalState);
-                        break;
-
-                    case "mazepuzzle":
-                        puzzle = new MazePuzzle(initialState, finalState);
-                        break;
-
-                    default:
-                        return BadRequest($"Puzzle type: {type} is not supported!");
-                }
-
+                GenericPuzzle puzzle = ParsePuzzleType(type, initialState, finalState);
                 List<PuzzleState> result = solver.Solve(puzzle);
+
                 if (result.Count == 0)
                 {
                     return Ok("No solution for the puzzle");
@@ -41,6 +27,21 @@ namespace PuzzleServer.Controllers
             catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        private GenericPuzzle ParsePuzzleType(string type, PuzzleState initialState, PuzzleState finalState) 
+        {
+            switch (type.ToLower())
+            {
+                case "movingpuzzle":
+                    return new MovingPuzzle(initialState, finalState);
+
+                case "mazepuzzle":
+                    return new MazePuzzle(initialState, finalState);
+
+                default:
+                    throw new ArgumentException($"Puzzle type: {type} is not supported!");
             }
         }
 
